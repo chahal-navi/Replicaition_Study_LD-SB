@@ -63,7 +63,7 @@ class projection_generators(Dataset):
     self.output_list = []
     for x, y in self.initial_generator:
       x = x.view(x.size(0), -1)
-      self.input_list.append(torch.matmul(self.projection_matrix.cpu(), x.cpu()))
+      self.input_list.append(torch.matmul(self.projection_matrix.cpu(), x.T.cpu()))
       self.output_list.append(y)
 
   def __len__(self):
