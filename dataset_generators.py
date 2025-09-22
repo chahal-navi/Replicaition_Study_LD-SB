@@ -45,12 +45,16 @@ class IFM_dataset(Dataset):
   def __getitem__(self, idx):
     return (torch.tensor(self.input_list[idx], dtype = torch.float32), torch.tensor(self.output_list[idx], dtype = torch.float32))
 
+# the projection generators class is used to construct a new dataset from an original dataset by projecting the inputs to an 
+# orthogonal space of the projection matrix of a trained model.
+
 
 class projection_generators(Dataset):
   def __init__(self, initial_generator, projection_vectors, dim):
     # The initial generator is an object of  the class IFM_dataset
     # The projection_vectors is a list of projection vectors obtained by the first k singular values
     # where K is the effective rank of the weight matrix
+    # dim represnts the input dimensions/ no. of input features.
     self.initial_generator = initial_generator
     self.projection_vectors = [i/torch.linalg.norm(i) for i in projection_vectors]
     self.projection_vectors = torch.stack(self.projection_vectors, dim = 0)
