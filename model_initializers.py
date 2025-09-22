@@ -1,7 +1,8 @@
 # model with various initialisations
 from torch import nn
 import numpy as np
-
+# num_coords represents the number of input features and m represents the number of 
+# hidden units to be defined in the layer 2
 class rich_model(nn.Module):
   def __init__(self, num_coords, m):
         super().__init__()
